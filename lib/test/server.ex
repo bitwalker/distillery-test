@@ -10,11 +10,7 @@ defmodule Test.Server do
   end
 
   def handle_call(:ping, _from, state) do
-    { :reply, :pong, state}
-  end
-
-  def do_stuff() do
-    :crypto.start()
+    { :reply, :v1, state}
   end
 
 end
