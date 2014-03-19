@@ -10,7 +10,7 @@ defmodule Test.Mixfile do
   # Configuration for the OTP application
   def application do
     [mod: { Test, [] },
-     applications: []]
+     applications: [:stdlib, :kernel, :elixir]]
   end
 
   # Returns the list of dependencies in the format:
