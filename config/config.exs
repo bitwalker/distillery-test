@@ -1,1 +1,1 @@
-[test: [foo: "bar", baz: :bif]]
+[test: [foo: "bar", baz: :qux]]
