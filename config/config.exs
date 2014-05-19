@@ -1,1 +1,1 @@
-[test: [foo: "bar", baz: :qux]]
+[test: [foo: "nope", baz: :qux]]
