@@ -1,1 +1,1 @@
-[test: [foo: "nope", baz: :qux]]
+[test: [foo: "nope", baz: :qux, "debug_level": {:on, [:passive]}]]
