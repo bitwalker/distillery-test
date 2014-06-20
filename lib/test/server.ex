@@ -1,5 +1,5 @@
 defmodule Test.Server do
-  use GenServer.Behaviour
+  use GenServer
 
   def start_link() do
     :gen_server.start_link({:local, :test}, __MODULE__, [], [])
