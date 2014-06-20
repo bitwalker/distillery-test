@@ -5,3 +5,4 @@
 relx
 erl_crash.dump
 *.ez
+mix.lock
