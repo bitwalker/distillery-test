@@ -6,11 +6,11 @@
       datatype: :binary,
       default: "bar"
     ],
-    "test.baz": [
-      doc: "Documentation for test.baz goes here.",
-      to: "test.baz",
+    "test.env": [
+      doc: "The current execution environment",
+      to: "test.env",
       datatype: :atom,
-      default: :qux
+      default: :dev
     ],
     "test.debug.level": [
       doc: """

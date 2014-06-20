@@ -1,1 +1,8 @@
-[test: [foo: "nope", baz: :qux, "debug_level": {:on, [:passive]}]]
+use Mix.Config
+
+config :test,
+  foo: "nope",
+  env: :none,
+  "debug_level": {:on, [:passive]}
+
+import_config "config.#{Mix.env}.exs"
