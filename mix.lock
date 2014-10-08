@@ -1,2 +1,3 @@
-%{"conform": {:package, "0.10.0"},
-  "exrm": {:package, "0.14.0"}}
+%{"conform": {:package, "0.10.5"},
+  "exrm": {:package, "0.14.11"},
+  "neotoma": {:git, "git://github.com/seancribbs/neotoma.git", "6c4a6009d3f34da2ec42c4f3585dae0abbb49dfc", []}}
