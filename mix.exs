@@ -4,13 +4,14 @@ defmodule Test.Mixfile do
   def project do
     [ app: :test,
       version: "0.0.1",
+      elixir: "~> 1.0",
       deps: deps ]
   end
 
   # Configuration for the OTP application
   def application do
     [mod: { Test, [] },
-     applications: [:stdlib, :kernel, :elixir]]
+     applications: [:logger, :timex]]
   end
 
   # Returns the list of dependencies in the format:
