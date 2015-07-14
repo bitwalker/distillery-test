@@ -11,7 +11,7 @@ defmodule Test.Mixfile do
   # Configuration for the OTP application
   def application do
     [mod: { Test, [] },
-     applications: [:logger]]
+     applications: [:logger, :timex]]
   end
 
   # Returns the list of dependencies in the format:
@@ -20,6 +20,6 @@ defmodule Test.Mixfile do
   # To specify particular versions, regardless of the tag, do:
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps do
-    [{:exrm, "~> 0.18.0"}]
+    [{:exrm, path: "../exrm"}, {:timex, "~> 0.15"}]
   end
 end
