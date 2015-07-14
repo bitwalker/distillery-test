@@ -10,7 +10,7 @@ defmodule Test.Server do
   end
 
   def handle_call(:ping, _from, state) do
-    { :reply, :v1, state}
+    { :reply, :v2, state}
   end
 
 end
