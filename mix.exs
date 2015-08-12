@@ -20,6 +20,6 @@ defmodule Test.Mixfile do
   # To specify particular versions, regardless of the tag, do:
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps do
-    [{:exrm, path: "../exrm"}, {:timex, "~> 0.15"}]
+    [{:exrm, path: "~> 0.18"}, {:timex, "~> 0.15"}]
   end
 end
