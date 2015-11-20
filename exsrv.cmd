@@ -3,13 +3,14 @@
 :: 19 November 2015
 
 @echo off
+SET THISFILENAME=%~n0
 SET COMMAND=%2
 SET ERTS_BIN_PATH=C:/progra~1/erl7.1/erts-7.1/bin
 SET ERLSRV_CMD=%ERTS_BIN_PATH%/erlsrv
 SET APPNAME=%1
 
 IF [%1]==[] (
-CALL :HELP exsrv.cmd
+CALL :HELP %THISFILENAME%
 GOTO :EOF
 )
 IF /I %COMMAND%==INSTALL (CALL :INSTALL)
@@ -34,7 +35,7 @@ GOTO :EOF
 SETLOCAL
 SET ELIXIR_HOME=/programdata/chocolatey/lib/Elixir
 CALL :REMOVE
-ECHO Installing %APPNAME% service
+ECHO %THISFILENAME%: Installing %APPNAME% service
 %ERLSRV_CMD% add %APPNAME% -machine %ERTS_BIN_PATH%/start_erl.exe -c "%APPNAME% Elixir Service" -w %TEMP% -args "-pa %ELIXIR_HOME%/lib/elixir/ebin %ELIXIR_HOME%/iex/ebin %ELIXIR_HOME%/lib/elixir/logger %ELIXIR_HOME%/lib/mix/ebin"
 ENDLOCAL
 GOTO :EOF
@@ -42,27 +43,28 @@ GOTO :EOF
 :REMOVE
 SETLOCAL
 CALL :STOP
-ECHO Removing %APPNAME% service
+ECHO  %THISFILENAME%: Removing %APPNAME% service
 %ERLSRV_CMD% remove %APPNAME%
 ENDLOCAL
 GOTO :EOF
 
 :START
 SETLOCAL
+ECHO  %THISFILENAME%: Starting %APPNAME% service
 %ERLSRV_CMD% start %APPNAME%
 ENDLOCAL
 GOTO :EOF
 
 :STOP
 SETLOCAL
-ECHO Stopping %APPNAME% service
+ECHO  %THISFILENAME%: Stopping %APPNAME% service
 %ERLSRV_CMD% stop %APPNAME%
 ENDLOCAL
 GOTO :EOF
 
 :LIST
 SETLOCAL
-ECHO Listing all erlsrv services
+ECHO %THISFILENAME%: Listing all erlsrv services
 %ERLSRV_CMD% list
 ENDLOCAL
 GOTO :EOF
