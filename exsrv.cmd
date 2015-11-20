@@ -32,9 +32,10 @@ GOTO :EOF
 
 :INSTALL
 SETLOCAL
+SET ELIXIR_HOME=/programdata/chocolatey/lib/Elixir
 CALL :REMOVE
 ECHO Installing %APPNAME% service
-%ERLSRV_CMD% add %APPNAME% -machine %ERTS_BIN_PATH%/start_erl.exe -c "%APPNAME% Elixir Service" -w %TEMP% -n %APPNAME%@localhost -d reuse
+%ERLSRV_CMD% add %APPNAME% -machine %ERTS_BIN_PATH%/start_erl.exe -c "%APPNAME% Elixir Service" -w %TEMP% -args "-pa %ELIXIR_HOME%/lib/elixir/ebin %ELIXIR_HOME%/iex/ebin %ELIXIR_HOME%/lib/elixir/logger %ELIXIR_HOME%/lib/mix/ebin"
 ENDLOCAL
 GOTO :EOF
 
