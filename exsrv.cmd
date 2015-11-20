@@ -17,7 +17,7 @@ GOTO :EOF
 :INSTALL
 CALL :REMOVE
 ECHO Installing %APPNAME% service
-%ERLSRV_CMD% add %APPNAME% -stopaction "init:stop()." -sname %APPNAME%_Service -debugtype reuse -args "-kernel error_logger {file,\\""C:/Test/kernel.txt\\""} -setcookie %APPNAME%_cookie -s %APPNAME%_init"
+%ERLSRV_CMD% add %APPNAME% -machine %ERTS_BIN_PATH%/start_erl.exe -c "%APPNAME% Elixir Service" -w %TEMP% -n %APPNAME%@localhost -d reuse
 GOTO :EOF
 
 :REMOVE
@@ -27,7 +27,6 @@ ECHO Removing %APPNAME% service
 GOTO :EOF
 
 :START
-ECHO Starting %APPNAME% service
 %ERLSRV_CMD% start %APPNAME%
 GOTO :EOF
 
