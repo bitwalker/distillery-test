@@ -3,8 +3,8 @@ defmodule Test.Mixfile do
 
   def project do
     [ app: :test,
-      version: "0.0.2",
-      elixir: "~> 1.0",
+      version: "0.0.1",
+      elixir: "~> 1.2",
       deps: deps ]
   end
 
@@ -20,6 +20,6 @@ defmodule Test.Mixfile do
   # To specify particular versions, regardless of the tag, do:
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps do
-    [{:exrm, "~> 0.18"}, {:timex, "~> 0.15"}]
+    [{:exrm, "~> 1.0"}, {:timex, "~> 2.0.0"}]
   end
 end
