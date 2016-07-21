@@ -8,6 +8,8 @@ defmodule Test.Supervisor do
   def init([]) do
     children = [
       # Define workers and child supervisors to be supervised
+      worker(Test.ServerC, []),
+      worker(Test.ServerB, []),
       worker(Test.Server, [])
     ]
 

@@ -1,15 +1,14 @@
-defmodule Test.Server do
+defmodule Test.ServerC do
   use GenServer
 
   def start_link() do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
   end
 
-  def init(_), do: {:ok, []}
+  def init(_), do: {:ok, nil}
 
   def handle_call(:ping, _from, state) do
-    _ = GenServer.call(Test.ServerC, :ping)
-    {:reply, :v1, state}
+    resp = GenServer.call(Test.ServerB, :ping)
+    {:reply, resp, state}
   end
-
 end

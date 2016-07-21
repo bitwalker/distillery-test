@@ -1,7 +1,7 @@
 /_build
 /_elixir
 /deps
-/rel
+/rel/test
 relx
 erl_crash.dump
 *.ez
