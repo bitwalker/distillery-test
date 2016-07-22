@@ -30,10 +30,15 @@ end
 
 release :test do
   set version: current_version(:test)
+  set commands: [
+    run: "rel/commands/run.sh"
+  ]
 
   conform_prestart = Path.join(["#{:code.priv_dir(:conform)}",
                                 "bin",
                                 "pre_start.sh"])
   set pre_start_hook: conform_prestart
+
+  plugin Conform.ReleasePlugin
 end
 
