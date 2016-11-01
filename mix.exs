@@ -13,7 +13,7 @@ defmodule Test.Mixfile do
   # Configuration for the OTP application
   def application do
     [mod: { Test, [] },
-     applications: [:logger, :timex]]
+     applications: [:logger, :poison, :timex]]
   end
 
   # Returns the list of dependencies in the format:
@@ -25,6 +25,7 @@ defmodule Test.Mixfile do
     [
       {:distillery, path: "../distillery"},
       {:conform, path: "../conform"},
-      {:timex, "~> 3.0"}, {:poison, ">= 0.0.0"}]
+      {:timex, "~> 3.0"},
+      {:poison, ">= 0.0.0"}]
   end
 end
