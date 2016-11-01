@@ -1,0 +1,50 @@
+FROM bitwalker/alpine-erlang:latest
+
+EXPOSE 5000
+ENV PORT=5000 \
+    MIX_ENV=prod \
+    REPLACE_OS_VARS=true \
+    TERM=xterm \
+    APP=test \
+    VER=0.1.0
+
+WORKDIR ${HOME}
+
+# Build Elixir for Erlang 19 on Alpine
+RUN \
+    echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    apk add --no-cache --update --virtual .elixir-build \
+      make && \
+    apk add --no-cache --update \
+      git && \
+    mkdir -p /opt/elixir-build && cd /opt/elixir-build && \
+    git clone https://github.com/elixir-lang/elixir && \
+    cd elixir && \
+    git checkout v1.3.4 && \
+    make && make install && \
+    mix local.hex --force && \
+    mix local.rebar --force && \
+    cd $HOME && \
+    rm -rf /opt/elixir-build && \
+    apk del .elixir-build
+
+# Cache deps
+COPY mix.exs mix.lock ./
+RUN mix do deps.get, deps.compile
+
+# Build app and deploy
+COPY . .
+RUN mix do compile, release --verbose --env=prod && \
+    mkdir -p /opt/$APP/log && \
+    cp ./run /opt/$APP/ && \
+    cp _build/prod/rel/$APP/releases/$VER/$APP.tar.gz /opt/$APP/ && \
+    cd /opt/$APP && \
+    tar -xzf $APP.tar.gz && \
+    rm $APP.tar.gz && \
+    rm -rf /opt/app/* && \
+    chmod -R 777 /opt/app && \
+    chmod -R 777 /opt/$APP
+
+WORKDIR /opt/$APP
+
+CMD ./bin/$APP foreground
