@@ -15,11 +15,22 @@ use Mix.Releases.Config,
 
 environment :dev do
   set dev_mode: true
+  set cookie: :foobar
   set include_erts: false
+  set sys_config: "rel/sys.config"
 end
 
 environment :prod do
+  set cookie: :foobar
   set include_erts: true
+  set include_system_libs: false
+  set include_src: false
+end
+
+environment :alt_erts do
+  set cookie: :foobar
+  set include_erts: "~/erlang/19.0"
+  set include_system_libs: true
   set include_src: false
 end
 
@@ -33,11 +44,6 @@ release :test do
   set commands: [
     run: "rel/commands/run.sh"
   ]
-
-  conform_prestart = Path.join(["#{:code.priv_dir(:conform)}",
-                                "bin",
-                                "pre_start.sh"])
-  set pre_start_hook: conform_prestart
 
   plugin Conform.ReleasePlugin
 end
