@@ -19,6 +19,9 @@ run: ## Run the app
 release: ## Build release of the app
 	MIX_ENV=prod mix release --verbose --env=prod
 
+upgrade:
+	MIX_ENV=prod mix release --verbose --env=prod --upgrade
+
 image: ## Build docker image
 	rm -rf deps/distillery
 	rm -rf deps/conform
