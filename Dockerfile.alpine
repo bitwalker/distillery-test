@@ -1,4 +1,4 @@
-FROM bitwalker/alpine-erlang:latest
+FROM bitwalker/alpine-elixir:latest
 
 EXPOSE 5000
 ENV PORT=5000 \
@@ -9,24 +9,6 @@ ENV PORT=5000 \
     VER=0.1.0
 
 WORKDIR ${HOME}
-
-# Build Elixir for Erlang 19 on Alpine
-RUN \
-    echo "@edge http://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-    apk add --no-cache --update --virtual .elixir-build \
-      make && \
-    apk add --no-cache --update \
-      git && \
-    mkdir -p /opt/elixir-build && cd /opt/elixir-build && \
-    git clone https://github.com/elixir-lang/elixir && \
-    cd elixir && \
-    git checkout v1.3.4 && \
-    make && make install && \
-    mix local.hex --force && \
-    mix local.rebar --force && \
-    cd $HOME && \
-    rm -rf /opt/elixir-build && \
-    apk del .elixir-build
 
 # Cache deps
 COPY mix.exs mix.lock ./
