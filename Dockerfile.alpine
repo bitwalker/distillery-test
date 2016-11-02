@@ -12,13 +12,14 @@ WORKDIR ${HOME}
 
 # Cache deps
 COPY mix.exs mix.lock ./
+COPY ./deps/distillery ../distillery
+COPY ./deps/conform ../conform
 RUN mix do deps.get, deps.compile
 
 # Build app and deploy
 COPY . .
-RUN mix do compile, release --verbose --env=prod && \
+RUN cat deps/distillery/mix.exs && mix do compile, release --verbose --env=prod && \
     mkdir -p /opt/$APP/log && \
-    cp ./run /opt/$APP/ && \
     cp _build/prod/rel/$APP/releases/$VER/$APP.tar.gz /opt/$APP/ && \
     cd /opt/$APP && \
     tar -xzf $APP.tar.gz && \
