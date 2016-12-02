@@ -11,7 +11,7 @@ Follow these steps to do a test upgrade of an app, along with a dependency (:tim
 - Verify with:
   - `./bin/test ping`
   - `./bin/test remote_console`
-  - At prompt `:gen_server.call(:test, :ping)`, should return `:v1`
+  - At prompt `GenServer.call(Test.Server, :ping)`, should return `:v1`
 - Make some changes, bump the version to `0.2.0`
 - `mix release --env=prod --upgrade`
 - Deploy upgrade: `cp _build/dev/rel/test/releases/0.2.0/test.tar.gz /tmp/test/releases/0.2.0/`
