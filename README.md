@@ -4,7 +4,7 @@ Follow these steps to do a test upgrade of an app, along with a dependency (:tim
 
 - Clone it
 - Prepare deployment directory e.g. `mkdir -p /tmp/test/releases/0.2.0`
-- Fetch deps and build: `cd distillery-test && mix do deps.get, mix compile`
+- Fetch deps and build: `cd distillery-test && mix do deps.get, compile`
 - Build release: `mix release --env=prod`
 - Deploy release: `cp _build/dev/rel/test/releases/0.1.0/test.tar.gz /tmp/test/`
 - Start release: `cd /tmp/test && tar -xf test.tar.gz && ./bin/test start`
