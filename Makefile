@@ -31,3 +31,9 @@ image: ## Build docker image
 
 docker: ## Build docker image and run it
 	docker run --rm -p 5000:5000 -it $(APP_NAME):$(VERSION)
+
+alpine-release: image ## Build release in Alpine and export it
+	./export_release.sh $(APP_NAME) $(VERSION)
+
+deploy-alpine: alpine-release ## Build a release and deploy to Alpine
+	./deploy_release.sh $(APP_NAME) $(VERSION)

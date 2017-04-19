@@ -18,13 +18,26 @@ environment :dev do
   set cookie: :foobar
   set include_erts: false
   set sys_config: "rel/sys.config"
+
+  plugin Conform.ReleasePlugin
 end
 
 environment :prod do
   set cookie: :foobar
   set include_erts: true
+  set include_system_libs: true
+  set include_src: false
+
+  plugin Conform.ReleasePlugin
+end
+
+environment :prod_without_erts do
+  set cookie: :foobar
+  set include_erts: false
   set include_system_libs: false
   set include_src: false
+
+  plugin Conform.ReleasePlugin
 end
 
 environment :alt_erts do
@@ -32,6 +45,8 @@ environment :alt_erts do
   set include_erts: "~/erlang/19.0"
   set include_system_libs: true
   set include_src: false
+
+  plugin Conform.ReleasePlugin
 end
 
 # You may define one or more releases in this file.
@@ -44,7 +59,5 @@ release :test do
   set commands: [
     run: "rel/commands/run.sh"
   ]
-
-  plugin Conform.ReleasePlugin
 end
 
