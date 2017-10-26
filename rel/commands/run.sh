@@ -1,3 +1,3 @@
 #!/bin/sh
 
-nodetool "eval" ""'Elixir.Code.eval_string(Elixir.List.to_string(\'$2\'))'"
+bin/test command Elixir.Test.Utils print_args

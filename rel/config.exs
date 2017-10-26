@@ -2,7 +2,7 @@ use Mix.Releases.Config,
     # This sets the default release built by `mix release`
     default_release: :default,
     # This sets the default environment used by `mix release`
-    default_environment: :dev
+    default_environment: Mix.env
 
 # For a full list of config options for both releases
 # and environments, visit https://hexdocs.pm/distillery/configuration.html
@@ -27,6 +27,7 @@ environment :prod do
   set include_erts: true
   set include_system_libs: true
   set include_src: false
+  set post_start_hook: "rel/test_post_start.sh"
 
   plugin Conform.ReleasePlugin
 end

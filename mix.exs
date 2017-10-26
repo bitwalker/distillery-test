@@ -13,7 +13,7 @@ defmodule Test.Mixfile do
   # Configuration for the OTP application
   def application do
     [mod: { Test, [] },
-     applications: [:logger, :poison, :timex]]
+     extra_applications: [:logger]]
   end
 
   # Returns the list of dependencies in the format:
@@ -23,9 +23,8 @@ defmodule Test.Mixfile do
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps do
     [
-      {:distillery, path: "../distillery"},
-      {:conform, path: "../conform"},
-      {:timex, "~> 3.0"},
-      {:poison, ">= 0.0.0"}]
+      {:distillery, path: "../distillery", runtime: false},
+      {:conform, path: "../conform", runtime: false}]
+      #{:timex, path: "../timex"}]
   end
 end
