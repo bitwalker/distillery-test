@@ -1,4 +1,4 @@
 use Mix.Config
 
 config :test,
-  env: :dev
+  env_file: "test.exs"
