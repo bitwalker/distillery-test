@@ -1,0 +1,12 @@
+[test]
+env = "wat-toml"
+
+[test.debug_level]
+enabled = true
+passive = true
+
+[sasl]
+errlog_type = "error"
+
+[logger]
+level = "debug"

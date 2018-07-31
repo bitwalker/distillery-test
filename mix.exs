@@ -4,7 +4,7 @@ defmodule Test.Mixfile do
   def project do
     [ app: :test,
       version: "0.1.0",
-      elixir: "~> 1.3",
+      elixir: "~> 1.6",
       deps: deps(),
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod]
@@ -12,19 +12,14 @@ defmodule Test.Mixfile do
 
   # Configuration for the OTP application
   def application do
-    [mod: { Test, [] },
+    [mod: {Test, []},
      extra_applications: [:logger]]
   end
 
-  # Returns the list of dependencies in the format:
-  # { :foobar, git: "https://github.com/elixir-lang/foobar.git", tag: "0.1" }
-  #
-  # To specify particular versions, regardless of the tag, do:
-  # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps do
     [
-      {:distillery, path: "../distillery", runtime: false},
-      {:conform, path: "../conform", runtime: false}]
-      #{:timex, path: "../timex"}]
+      {:distillery, path: "../distillery"},
+      {:toml, "~> 0.1"}
+    ]
   end
 end

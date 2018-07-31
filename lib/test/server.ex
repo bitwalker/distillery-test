@@ -11,5 +11,4 @@ defmodule Test.Server do
     _ = GenServer.call(Test.ServerC, :ping)
     {:reply, :v1, state}
   end
-
 end
