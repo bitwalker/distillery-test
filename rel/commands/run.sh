@@ -1,3 +1,3 @@
 #!/bin/sh
 
-bin/test command Elixir.Test.Utils print_args
+erl -noshell -eval "io:format(\"~p.\", [code:root_dir()])." -s erlang halt

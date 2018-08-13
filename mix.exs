@@ -1,9 +1,13 @@
 defmodule Test.Mixfile do
   use Mix.Project
 
+  {_, shorthash} = System.cmd("git", ["describe", "--always"])
+
+  @version "0.1.0+#{shorthash}"
+
   def project do
     [ app: :test,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.6",
       deps: deps(),
       build_embedded: Mix.env == :prod,
@@ -13,13 +17,14 @@ defmodule Test.Mixfile do
   # Configuration for the OTP application
   def application do
     [mod: {Test, []},
-     extra_applications: [:logger]]
+     extra_applications: [:logger, :asn1]]
   end
 
   defp deps do
     [
       {:distillery, path: "../distillery"},
-      {:toml, "~> 0.1"}
+      #{:distillery, github: "bitwalker/distillery"},
+      {:toml, "~> 0.1"},
     ]
   end
 end

@@ -1,4 +1,4 @@
 use Mix.Config
 
 config :test,
-  env_file: "prod.exs"
+  source: __ENV__.file
