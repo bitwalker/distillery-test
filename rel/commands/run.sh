@@ -1,3 +1,3 @@
 #!/bin/sh
 
-erl -noshell -eval "io:format(\"~p.\", [code:root_dir()])." -s erlang halt
+release_remote_ctl rpc --mfa "Test.Tasks.run/1" --argv -- "$@"
