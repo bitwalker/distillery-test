@@ -1,13 +1,9 @@
 defmodule Test.Mixfile do
   use Mix.Project
 
-  {shorthash, 0} = System.cmd("git", ["rev-parse", "--short", "HEAD"])
-
-  @version "0.1.0+#{shorthash}"
-
   def project do
     [ app: :test,
-      version: @version,
+      version: "0.1.0",
       elixir: "~> 1.6",
       deps: deps(),
       build_embedded: Mix.env == :prod,

@@ -1,39 +1,22 @@
 .PHONY: help clean build image run release image docker
 
-APP_NAME ?= distillery-test
-VERSION ?= `cat mix.exs | grep "version:" | cut -d '"' -f2`
+APP_NAME ?= `grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g'`
+APP_VSN ?= `grep 'version:' mix.exs | cut -d '"' -f2`
+BUILD ?= `git rev-parse --short HEAD`
 
 help:
-	@echo "$(APP_NAME):$(VERSION)"
+	@echo "$(APP_NAME):$(APP_VSN)-$(BUILD)"
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 clean: ## Clean build artifacts
 	mix clean
 
-build: ## Build the app
-	mix compile
+run: ## Run the app from Docker
+	docker run --stop-signal=SIGINT --rm -it $(APP_NAME):latest
 
-run: ## Run the app
-	mix run --no-halt
-
-release: ## Build release of the app
-	MIX_ENV=prod mix release --verbose --env=prod
-
-upgrade:
-	MIX_ENV=prod mix release --verbose --env=prod --upgrade
-
-image: ## Build docker image
-	rm -rf deps/distillery
-	rm -rf deps/conform
-	cp -R ../distillery deps/distillery
-	cp -R ../conform deps/conform
-	docker build --force-rm --rm -t $(APP_NAME):$(VERSION) -f Dockerfile.alpine .
-
-docker: ## Build docker image and run it
-	docker run --rm -p 5000:5000 -it $(APP_NAME):$(VERSION)
-
-alpine-release: image ## Build release in Alpine and export it
-	./export_release.sh $(APP_NAME) $(VERSION)
-
-deploy-alpine: alpine-release ## Build a release and deploy to Alpine
-	./deploy_release.sh $(APP_NAME) $(VERSION)
+image: ## Build a Docker image
+	docker build --build-arg APP_NAME=$(APP_NAME) \
+		--build-arg APP_VSN=$(APP_VSN) \
+		--build-arg SKIP_PHOENIX=true \
+		-t $(APP_NAME):$(APP_VSN)-$(BUILD) \
+		-t $(APP_NAME):latest .
