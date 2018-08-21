@@ -12,11 +12,10 @@ clean: ## Clean build artifacts
 	mix clean
 
 run: ## Run the app from Docker
-	docker run --stop-signal=SIGINT --rm -it $(APP_NAME):latest
+	docker run --stop-signal=SIGINT --env PORT=4000 --expose 4000 -p 4000:4000 --rm -it $(APP_NAME):latest
 
 image: ## Build a Docker image
 	docker build --build-arg APP_NAME=$(APP_NAME) \
 		--build-arg APP_VSN=$(APP_VSN) \
-		--build-arg SKIP_PHOENIX=true \
 		-t $(APP_NAME):$(APP_VSN)-$(BUILD) \
 		-t $(APP_NAME):latest .

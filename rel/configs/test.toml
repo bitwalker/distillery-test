@@ -1,12 +1,7 @@
-[test]
-env = "wat-toml"
-
-[test.debug_level]
-enabled = true
-passive = true
-
-[sasl]
-errlog_type = "error"
-
-[logger]
-level = "debug"
+[test."TestWeb.Endpoint"]
+server = true
+load_from_system_env = false
+http = { port = 4000 }
+url = { host = "localhost", port = 4000 }
+root = "."
+secret_key_base = "u1QXlca4XEZKb1o3HL/aUlznI1qstCNAQ6yme/lFbFIs0Iqiq/annZ+Ty8JyUCDc"

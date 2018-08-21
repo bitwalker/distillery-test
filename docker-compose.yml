@@ -1,0 +1,9 @@
+version: '3.5'
+
+services:
+    web:
+        image: "test:latest"
+        ports:
+            - "80:4000" # In our .env file above, we chose port 4000
+        env_file:
+            - docker.env

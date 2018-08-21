@@ -8,3 +8,4 @@ erl_crash.dump
 mix.lock
 /mount
 /releases
+/assets/node_modules
