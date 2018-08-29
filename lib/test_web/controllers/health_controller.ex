@@ -6,7 +6,8 @@ defmodule TestWeb.HealthController do
     if Test.Database.available?() do
       healthy(conn)
     else
-      degraded(conn, %{database: :unavailable})
+      vsn = Application.spec(:test, :vsn)
+      degraded(conn, %{database: :down, version: "#{inspect vsn}"})
     end
   rescue
     err ->
