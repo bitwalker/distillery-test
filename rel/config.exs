@@ -46,6 +46,7 @@ release :test do
   set cookie: :test
   set commands: [
     run: "rel/commands/run.sh",
+    local_run: "rel/commands/local_run.sh",
     config: "rel/commands/config.sh"
   ]
   set pre_start_hooks: "rel/hooks/pre_start.d"
